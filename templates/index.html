@@ -1,0 +1,169 @@
+
+{% extends "base.html" %}
+
+{% block title %}TutorConnect - Learn From Local Experts{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+                <span class="badge bg-light text-primary mb-3">
+                    Empowering Local Tutors
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Learn from great teachers,
+                    <span class="text-warning">wherever you are.</span>
+                </h1>
+
+                <p class="lead mt-3">
+                    Discover trusted local tutors, join online coaching,
+                    attend offline classes, and book personalized
+                    doubt-solving sessions.
+                </p>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('tutors') }}"
+                       class="btn btn-warning btn-lg me-2">
+                        Find a Tutor
+                    </a>
+
+                    <a href="{{ url_for('register') }}"
+                       class="btn btn-outline-light btn-lg">
+                        Become a Teacher
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="hero-card">
+                    <h4>What can you learn?</h4>
+                    <div class="subject-pill">Mathematics</div>
+                    <div class="subject-pill">Science</div>
+                    <div class="subject-pill">Programming</div>
+                    <div class="subject-pill">English</div>
+                    <div class="subject-pill">Data Analytics</div>
+                    <div class="subject-pill">Competitive Exams</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">How TutorConnect Works</h2>
+        <p class="text-muted">
+            A simple platform for students, teachers, and administrators.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">🔎</div>
+                <h4>Find Your Tutor</h4>
+                <p>
+                    Search teachers by subject, location, experience,
+                    and teaching mode.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h4>Learn Your Way</h4>
+                <p>
+                    Choose online coaching, offline classes,
+                    or one-to-one doubt-solving sessions.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-card">
+                <div class="feature-icon">👩‍🏫</div>
+                <h4>Grow as a Teacher</h4>
+                <p>
+                    Create your profile, list courses, and reach
+                    students beyond your locality.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="bg-light py-5">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Featured Tutors</h2>
+                <p class="text-muted mb-0">
+                    Explore approved teachers on our platform.
+                </p>
+            </div>
+
+            <a href="{{ url_for('tutors') }}"
+               class="btn btn-outline-primary">
+                View All
+            </a>
+        </div>
+
+        <div class="row g-4">
+
+            {% for tutor in tutors %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card tutor-card h-100">
+
+                    <div class="tutor-avatar">
+                        {{ tutor.name[0] | upper }}
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tutor.name }}</h5>
+
+                        <p class="text-primary mb-2">
+                            {{ tutor.subjects or 'Subjects not added' }}
+                        </p>
+
+                        <p class="small text-muted">
+                            {{ tutor.qualification or 'Experienced tutor' }}
+                        </p>
+
+                        <p class="small">
+                            📍 {{ tutor.location or 'Location not specified' }}
+                        </p>
+
+                        <a href="{{ url_for('tutor_detail', teacher_id=tutor.id) }}"
+                           class="btn btn-primary w-100">
+                            View Profile
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    No approved tutors are available yet.
+                    Register as a teacher to get started.
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+```

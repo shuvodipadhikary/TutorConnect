@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="form-card">
+        <h2>Review Your Experience</h2>
+
+        <p>
+            <strong>Teacher:</strong>
+            {{ booking.teacher_name }}
+        </p>
+
+        {% if booking.course_title %}
+            <p>
+                <strong>Course:</strong>
+                {{ booking.course_title }}
+            </p>
+        {% endif %}
+
+        <form method="POST">
+            <label>Rating</label>
+            <select name="rating" required>
+                <option value="">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ — Excellent</option>
+                <option value="4">⭐⭐⭐⭐ — Very Good</option>
+                <option value="3">⭐⭐⭐ — Good</option>
+                <option value="2">⭐⭐ — Average</option>
+                <option value="1">⭐ — Needs Improvement</option>
+            </select>
+
+            <label>Your Feedback</label>
+            <textarea
+                name="feedback"
+                rows="6"
+                required
+                placeholder="Share your experience with this teacher..."
+            ></textarea>
+
+            <button type="submit" class="btn btn-primary">
+                Submit Review
+            </button>
+        </form>
+    </div>
+</div>

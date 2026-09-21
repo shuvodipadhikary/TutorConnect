@@ -1,0 +1,144 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ teacher.name }} - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="profile-header mb-4">
+        <div class="row align-items-center">
+
+            <div class="col-md-2 text-center">
+                <div class="large-avatar">
+                    {{ teacher.name[0] | upper }}
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <h1 class="fw-bold">{{ teacher.name }}</h1>
+
+                <p class="text-primary fs-5">
+                    {{ teacher.subjects or 'Subjects not specified' }}
+                </p>
+
+                <p class="text-muted mb-1">
+                    🎓 {{ teacher.qualification or 'Qualification not specified' }}
+                </p>
+
+                <p class="text-muted mb-1">
+                    💼 {{ teacher.experience }} years of teaching experience
+                </p>
+
+                <p class="text-muted">
+                    📍 {{ teacher.location or 'Location not specified' }}
+                </p>
+            </div>
+
+            <div class="col-md-3 text-md-end">
+                <a href="{{ url_for('book_session', teacher_id=teacher.id) }}"
+                   class="btn btn-primary btn-lg">
+                    Book a Session
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-lg-7">
+
+            <div class="card p-4 mb-4">
+                <h4 class="fw-bold">About the Teacher</h4>
+                <p class="text-muted">
+                    {{ teacher.bio or 'This teacher has not added a biography yet.' }}
+                </p>
+            </div>
+
+            <div class="card p-4">
+                <h4 class="fw-bold mb-3">Available Courses</h4>
+
+                {% for course in courses %}
+                <div class="course-item mb-3">
+
+                    <div class="d-flex justify-content-between">
+                        <h5 class="fw-bold">{{ course.title }}</h5>
+                        <span class="badge bg-primary">
+                            {{ course.mode }}
+                        </span>
+                    </div>
+
+                    <p class="text-muted mb-2">
+                        {{ course.description }}
+                    </p>
+
+                    <p class="small mb-1">
+                        📚 Subject: {{ course.subject }}
+                    </p>
+
+                    <p class="small mb-1">
+                        🎯 Level: {{ course.level }}
+                    </p>
+
+                    <p class="small mb-1">
+                        ⏱️ Duration: {{ course.duration }}
+                    </p>
+
+                    <p class="fw-bold text-success">
+                        ₹{{ course.price }}
+                    </p>
+
+                </div>
+                {% else %}
+                <p class="text-muted">
+                    No approved courses listed yet.
+                </p>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+            <div class="card p-4 mb-4">
+                <h4 class="fw-bold">Teaching Details</h4>
+
+                <p>🖥️ <strong>Mode:</strong> {{ teacher.teaching_mode }}</p>
+                <p>💰 <strong>Hourly Rate:</strong>
+                    ₹{{ teacher.hourly_rate or 0 }}
+                </p>
+                <p>📍 <strong>Location:</strong>
+                    {{ teacher.location or 'Not specified' }}
+                </p>
+
+                <a href="{{ url_for('book_session', teacher_id=teacher.id) }}"
+                   class="btn btn-warning w-100">
+                    Book Online / Offline Session
+                </a>
+            </div>
+
+            <div class="card p-4">
+                <h4 class="fw-bold">Need Quick Help?</h4>
+                <p class="text-muted">
+                    Book a 1-hour or 2-hour doubt-solving session
+                    for a specific topic or problem.
+                </p>
+
+                <a href="{{ url_for('book_session', teacher_id=teacher.id) }}"
+                   class="btn btn-outline-primary w-100">
+                    Book Doubt-Solving
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

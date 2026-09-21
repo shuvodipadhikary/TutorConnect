@@ -1,0 +1,109 @@
+
+{% extends "base.html" %}
+
+{% block title %}Find Tutors - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+        <h1 class="fw-bold">Find Your Perfect Tutor</h1>
+        <p class="text-muted">
+            Search verified local teachers offering online and offline classes.
+        </p>
+    </div>
+
+    <form method="GET" class="search-box mb-5">
+        <div class="row g-2">
+
+            <div class="col-md-6">
+                <input type="text"
+                       name="search"
+                       value="{{ search }}"
+                       class="form-control"
+                       placeholder="Search by name, subject, or location">
+            </div>
+
+            <div class="col-md-4">
+                <input type="text"
+                       name="subject"
+                       value="{{ subject }}"
+                       class="form-control"
+                       placeholder="Subject e.g. Mathematics">
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    Search
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="row g-4">
+
+        {% for tutor in tutors %}
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card tutor-card h-100">
+
+                <div class="tutor-avatar">
+                    {{ tutor.name[0] | upper }}
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold">{{ tutor.name }}</h5>
+
+                    <p class="text-primary fw-semibold">
+                        {{ tutor.subjects or 'Subjects not specified' }}
+                    </p>
+
+                    <p class="small text-muted mb-2">
+                        🎓 {{ tutor.qualification or 'Qualification not specified' }}
+                    </p>
+
+                    <p class="small mb-2">
+                        💼 {{ tutor.experience }} years experience
+                    </p>
+
+                    <p class="small mb-2">
+                        📍 {{ tutor.location or 'Location not specified' }}
+                    </p>
+
+                    <p class="small mb-3">
+                        🖥️ {{ tutor.teaching_mode }}
+                    </p>
+
+                    {% if tutor.hourly_rate %}
+                    <p class="fw-bold">
+                        ₹{{ tutor.hourly_rate }}/hour
+                    </p>
+                    {% endif %}
+
+                    <a href="{{ url_for('tutor_detail', teacher_id=tutor.id) }}"
+                       class="btn btn-primary w-100">
+                        View Profile
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">
+                No tutors found. Try a different search.
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

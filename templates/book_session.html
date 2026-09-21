@@ -1,0 +1,125 @@
+
+{% extends "base.html" %}
+
+{% block title %}Book Session - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card p-4 shadow-sm">
+
+                <h2 class="fw-bold mb-1">Book a Session</h2>
+                <p class="text-muted mb-4">
+                    With <strong>{{ teacher.name }}</strong>
+                </p>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Session Type</label>
+                        <select name="session_type"
+                                class="form-select"
+                                required>
+                            <option value="Regular Coaching">
+                                Regular Coaching
+                            </option>
+                            <option value="Doubt Solving">
+                                Doubt-Solving Session
+                            </option>
+                            <option value="Trial Class">
+                                Trial Class
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Course (Optional)</label>
+                        <select name="course_id" class="form-select">
+                            <option value="">General / No Specific Course</option>
+
+                            {% for course in courses %}
+                            <option value="{{ course.id }}">
+                                {{ course.title }} - ₹{{ course.price }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date"
+                                   name="session_date"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Preferred Time</label>
+                            <input type="time"
+                                   name="session_time"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Duration</label>
+                        <select name="duration"
+                                class="form-select"
+                                required>
+                            <option value="1">1 Hour</option>
+                            <option value="2">2 Hours</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Preferred Mode</label>
+                        <select name="session_type"
+                                class="form-select">
+                            <option value="Online Coaching">
+                                Online
+                            </option>
+                            <option value="Offline Coaching">
+                                Offline
+                            </option>
+                            <option value="Doubt Solving">
+                                Doubt Solving
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            Message / Topic Details
+                        </label>
+
+                        <textarea name="message"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Describe what you want to learn or the doubt you want to solve."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+                        Submit Booking Request
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+
+{% block title %}Register - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+    <div class="auth-card">
+
+        <h2 class="fw-bold text-center mb-2">Create Account</h2>
+        <p class="text-muted text-center mb-4">
+            Join our learning community.
+        </p>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       placeholder="Enter your full name"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       placeholder="Enter your email"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Minimum 6 characters"
+                       minlength="6"
+                       required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Register As</label>
+
+                <select name="role" class="form-select" required>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary w-100">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="text-center mt-4 mb-0">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login here</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+```

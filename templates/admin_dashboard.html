@@ -1,0 +1,200 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <h2 class="fw-bold">Administrator Panel</h2>
+        <p class="text-muted">
+            Authorize teachers, approve courses, and monitor platform activity.
+        </p>
+    </div>
+
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Students</h6>
+                <h2>{{ stats.students }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Teachers</h6>
+                <h2>{{ stats.teachers }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Courses</h6>
+                <h2>{{ stats.courses }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Bookings</h6>
+                <h2>{{ stats.bookings }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="card p-4 mb-4">
+
+        <h4 class="fw-bold mb-3">Pending Teacher Approvals</h4>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subjects</th>
+                        <th>Qualification</th>
+                        <th>Experience</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for teacher in pending_teachers %}
+                    <tr>
+                        <td>{{ teacher.name }}</td>
+                        <td>{{ teacher.email }}</td>
+                        <td>{{ teacher.subjects or 'Not added' }}</td>
+                        <td>{{ teacher.qualification or 'Not added' }}</td>
+                        <td>{{ teacher.experience }} years</td>
+                        <td>
+                            <a href="{{ url_for('admin_teacher_action', teacher_id=teacher.id, action='approve') }}"
+                               class="btn btn-sm btn-success">
+                                Approve
+                            </a>
+
+                            <a href="{{ url_for('admin_teacher_action', teacher_id=teacher.id, action='reject') }}"
+                               class="btn btn-sm btn-danger">
+                                Reject
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            No pending teacher approvals.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="card p-4 mb-4">
+
+        <h4 class="fw-bold mb-3">Pending Course Approvals</h4>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Teacher</th>
+                        <th>Subject</th>
+                        <th>Mode</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for course in pending_courses %}
+                    <tr>
+                        <td>{{ course.title }}</td>
+                        <td>{{ course.teacher_name }}</td>
+                        <td>{{ course.subject }}</td>
+                        <td>{{ course.mode }}</td>
+                        <td>₹{{ course.price }}</td>
+                        <td>
+                            <a href="{{ url_for('admin_course_action', course_id=course.id, action='approve') }}"
+                               class="btn btn-sm btn-success">
+                                Approve
+                            </a>
+
+                            <a href="{{ url_for('admin_course_action', course_id=course.id, action='reject') }}"
+                               class="btn btn-sm btn-danger">
+                                Reject
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            No pending course approvals.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="card p-4">
+
+        <h4 class="fw-bold mb-3">All Booking Requests</h4>
+
+        <div class="table-responsive">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Teacher</th>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for booking in all_bookings %}
+                    <tr>
+                        <td>{{ booking.student_name }}</td>
+                        <td>{{ booking.teacher_name }}</td>
+                        <td>{{ booking.session_type }}</td>
+                        <td>{{ booking.session_date }}</td>
+                        <td>{{ booking.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            No bookings available.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

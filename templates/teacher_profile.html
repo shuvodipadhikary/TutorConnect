@@ -1,0 +1,118 @@
+
+{% extends "base.html" %}
+
+{% block title %}Edit Teacher Profile - TutorConnect{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card p-4 shadow-sm">
+
+                <h2 class="fw-bold mb-4">Create Your Teacher Profile</h2>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">About You</label>
+                        <textarea name="bio"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Tell students about your teaching style and experience.">{{ profile.bio }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Subjects You Teach
+                        </label>
+                        <input type="text"
+                               name="subjects"
+                               class="form-control"
+                               placeholder="Mathematics, Physics, Python"
+                               value="{{ profile.subjects }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Qualification</label>
+                        <input type="text"
+                               name="qualification"
+                               class="form-control"
+                               placeholder="M.Sc Mathematics, B.Tech, etc."
+                               value="{{ profile.qualification }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Teaching Experience (Years)</label>
+                        <input type="number"
+                               name="experience"
+                               class="form-control"
+                               min="0"
+                               value="{{ profile.experience }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input type="text"
+                               name="location"
+                               class="form-control"
+                               placeholder="Kolkata, West Bengal"
+                               value="{{ profile.location }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Teaching Mode</label>
+                        <select name="teaching_mode" class="form-select">
+                            <option value="Online"
+                                {% if profile.teaching_mode == 'Online' %}selected{% endif %}>
+                                Online
+                            </option>
+
+                            <option value="Offline"
+                                {% if profile.teaching_mode == 'Offline' %}selected{% endif %}>
+                                Offline
+                            </option>
+
+                            <option value="Online / Offline"
+                                {% if profile.teaching_mode == 'Online / Offline' %}selected{% endif %}>
+                                Online / Offline
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Hourly Rate (₹)</label>
+                        <input type="number"
+                               name="hourly_rate"
+                               class="form-control"
+                               min="0"
+                               step="0.01"
+                               value="{{ profile.hourly_rate }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel"
+                               name="phone"
+                               class="form-control"
+                               placeholder="Enter contact number"
+                               value="{{ profile.phone }}">
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+                        Save Profile
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+```
