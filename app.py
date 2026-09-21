@@ -15,7 +15,7 @@ app.secret_key = os.environ.get(
     "change-this-secret-key-in-production"
 )
 
-DATABASE = "tutor_platform.db"
+DATABASE = "/tmp/tutor_platform.db"
 
 
 # --------------------------------------------------
